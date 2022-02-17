@@ -42,6 +42,5 @@ jobs:
           push: true
           tags: |
             ${{ steps.image-name.outputs.GHRC_IMAGE_NAME }}
-            ${{ steps.image-name.outputs.ALI_IMAGE_NAME }}
 
 
