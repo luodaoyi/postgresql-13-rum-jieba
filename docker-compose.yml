@@ -1,0 +1,12 @@
+db:
+  build: . 
+  container_name: extension-pgsql 
+  restart: always
+  privileged: true  
+  ports:
+    - 5432:5432
+  environment:
+    POSTGRES_PASSWORD: luodaoyi
+    PGDATA: /var/lib/postgresql/data/pgdata
+  volumes:
+    - ./data:/var/lib/postgresql/data/pgdata 
