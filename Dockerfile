@@ -1,16 +1,15 @@
 FROM postgres:13
 
-
+ENV SCWS_VERSION 1.2.3
 ENV RUM_VERSION 1.3.9
 
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        ca-certificates gcc g++ libc6-dev cmake make git wget curl \
+        postgresql-server-dev-13 libpq-dev systemtap-sdt-dev
 
-RUN apt-get update && \
-        apt-get install -y --no-install-recommends \
-        ca-certificates gcc g++ libc6-dev cmake make git \
-        postgresql-server-dev-13 libpq-dev systemtap-sdt-dev && \
-        mkdir -p /usr/lib/scws/rum && \
+RUN mkdir -p /usr/lib/scws/rum && \
         git clone https://github.com/postgrespro/rum --branch ${RUM_VERSION} --single-branch /usr/lib/scws/rum && \
         git clone https://github.com/jaiminpan/pg_jieba /usr/lib/scws/pg_jieba
         
