@@ -27,15 +27,9 @@ jobs:
           sed -i 's/RUN sed -i/#RUN sed -i/g' ./Dockerfile
         id: remove-mirror
 
-      - name: set repository name
-        run: | 
-          echo ::set-env name=REPOSITORY_NAME::$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}' | sed -e "s/:refs//")
-          echo "repository name : $REPOSITORY_NAME"
-        id: set-env
-
       - name: Set up image name
         run: |
-          GHRC_IMAGE_NAME=$(echo "ghcr.io/${{ github.repository_owner }}/{{ REPOSITORY_NAME }}" | tr '[:upper:]' '[:lower:]')
+          GHRC_IMAGE_NAME=$(echo "ghcr.io/${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           echo "::set-output name=GHRC_IMAGE_NAME::$GHRC_IMAGE_NAME"
         id: image-name
 
